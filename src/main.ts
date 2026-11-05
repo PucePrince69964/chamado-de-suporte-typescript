@@ -3,7 +3,7 @@ import { tarefas } from "./dados";
 import type { Prioridade, Tarefa, Urgencia } from "./tipo.ts";
 import { adicionarTarefa, transformar } from "./servicos";
 elemento("nome-do-sistema").textContent = "Chamados de Suporte";
-elemento("versao").textContent = "v0.1.0";
+elemento("versao").textContent = "v0.2.0";
 elemento("data-de-hoje").textContent = new Date().toLocaleDateString("pt-BR");
 
 const lista: Tarefa[] = [...tarefas];
