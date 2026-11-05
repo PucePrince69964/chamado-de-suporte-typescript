@@ -31,10 +31,11 @@ function desenhar(): void {
             pendentes++;
         }
 
-        if (tarefa.urgencia === "Nivel 3") {
+        if (tarefa.urgencia === "Nivel 1") {
             contador++;
-        }           
+        }      
     }
+    console.log(contador)
 elemento("total").textContent = String(lista.length);
 elemento("pendentes").textContent = String(pendentes);
 elemento("mais-importantes").textContent = String(contador);

@@ -1,6 +1,6 @@
 export type Prioridade = "baixa" | "media" | "alta";
 export type Status = "aberto" | "em_andamento" | "resolvido";
-export type Urgencia = "Nivel 1" | "Nivel 2" | "Nivel 3"
+export type Urgencia = "Nivel 1" | "Nivel 2" | "Nivel 3";
 
 export interface Tarefa {
     readonly id: number;
