@@ -35,7 +35,6 @@ function desenhar(): void {
             contador++;
         }      
     }
-    console.log(contador)
 elemento("total").textContent = String(lista.length);
 elemento("pendentes").textContent = String(pendentes);
 elemento("mais-importantes").textContent = String(contador);
