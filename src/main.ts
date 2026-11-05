@@ -1,9 +1,9 @@
 import { campo, elemento, selecao } from "./dom";
 import { tarefas } from "./dados";
-import type { Prioridade, Tarefa } from "./tipo.ts";
+import type { Prioridade, Tarefa, Urgencia } from "./tipo.ts";
 import { adicionarTarefa, transformar } from "./servicos";
-elemento("nome-do-sistema").textContent = "TaskFlow";
-elemento("versao").textContent = "v0.2.0";
+elemento("nome-do-sistema").textContent = "Chamados de Suporte";
+elemento("versao").textContent = "v0.1.0";
 elemento("data-de-hoje").textContent = new Date().toLocaleDateString("pt-BR");
 
 const lista: Tarefa[] = [...tarefas];
@@ -25,13 +25,19 @@ function desenhar(): void {
     const itens = transformar(lista, criarItem); 
     elemento("lista").replaceChildren(...itens);
     let pendentes = 0;
+    let contador = 0;
     for (const tarefa of lista) {
-        if (tarefa.status === "pendente") {
-        pendentes++;
+        if (tarefa.status === "aberto") {
+            pendentes++;
+        }
+
+        if (tarefa.urgencia === "Nivel 3") {
+            contador++;
+        }           
     }
-}
 elemento("total").textContent = String(lista.length);
 elemento("pendentes").textContent = String(pendentes);
+elemento("mais-importantes").textContent = String(contador);
 }
 
 elemento("formulario").addEventListener("submit", (evento) => {
@@ -41,6 +47,7 @@ elemento("formulario").addEventListener("submit", (evento) => {
         adicionarTarefa(lista, {
             titulo: campo("titulo").value.trim(),
             prioridade: selecao("prioridade").value as Prioridade,
+            urgencia: selecao("urgencia").value as Urgencia,
             tags: [],
         });
         campo("titulo").value = "";

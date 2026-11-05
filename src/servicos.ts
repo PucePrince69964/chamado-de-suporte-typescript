@@ -17,7 +17,7 @@ throw new Error("O título precisa ter pelo menos 3 caracteres.");
 const tarefa: Tarefa = {
     ...dados,
     id: gerarId(lista),
-    status: "pendente",
+    status: "aberto",
     criadaEm: new Date(),
     };
     lista.push(tarefa);
