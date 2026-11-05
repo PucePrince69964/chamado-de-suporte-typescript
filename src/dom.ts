@@ -1,5 +1,3 @@
-// Vem pronto desde a Aula 1. Três funções que conversam com a tela.
-
 export function elemento(id: string): HTMLElement {
   const encontrado = document.getElementById(id);
   if (!encontrado) {
