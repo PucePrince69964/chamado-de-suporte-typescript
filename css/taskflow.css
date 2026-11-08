@@ -13,8 +13,8 @@
 body { margin: 0; font-family: system-ui, sans-serif; background: var(--fundo); color: var(--texto); }
 .cabecalho { display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px 24px; background: var(--azul); color: #fff; flex-wrap: wrap; }
-.cabecalho__titulo { margin: 0; font-size: 1.6rem; }
-.cabecalho__subtitulo { margin: 4px 0 0; opacity: .85; }
+.cabecalho__titulo { margin: 0; font-size: 1.9rem; text-align: center; flex: 1 1 200px; }
+.cabecalho__subtitulo { margin: 4px 0 0 1730px; opacity: .85; }
 .cabecalho__acoes { display: flex; gap: 8px; align-items: center; }
 main, .entrada { max-width: 880px; margin: 24px auto; padding: 0 16px; }
 .entrada { max-width: 420px; display: grid; gap: 12px; }
@@ -36,8 +36,8 @@ main, .entrada { max-width: 880px; margin: 24px auto; padding: 0 16px; }
 .botao--perigo { border-color: var(--alta); color: var(--alta); }
 .aviso { background: #fff6d6; color: #5c4600; border-left: 4px solid var(--amarelo); padding: 10px 14px; border-radius: 6px; }
 .aviso--oculto { display: none; }
-.estatisticas { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.estatistica { background: var(--cartao); border: 1px solid var(--borda); border-radius: 10px; padding: 12px; text-align: center; }
+.estatisticas {list-style: none; padding: 0; display: flex; grid-template-columns: repeat(4, 1fr); gap: 20px;  justify-content: center;}
+.estatistica { background: var(--cartao); border: 1px solid var(--borda); border-radius: 10px; padding: 25px 100px; text-align: center; }
 .estatistica__numero { display: block; font-size: 1.8rem; font-weight: 700; color: var(--azul); }
 .estatistica__rotulo { font-size: .85rem; color: var(--suave); }
 .filtros { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
