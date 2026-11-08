@@ -13,8 +13,8 @@
 body { margin: 0; font-family: system-ui, sans-serif; background: var(--fundo); color: var(--texto); }
 .cabecalho { display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px 24px; background: var(--azul); color: #fff; flex-wrap: wrap; }
-.cabecalho__titulo { margin: 0; font-size: 1.9rem; text-align: center; flex: 1 1 200px; }
-.cabecalho__subtitulo { margin: 4px 0 0 1730px; opacity: .85; }
+.cabecalho__titulo { margin: 0; font-size: 1.9rem; text-align: center; flex: 1 1 200px; transform: translateY(50%);}
+.cabecalho__subtitulo { margin-left: 0; text-align: center; }
 .cabecalho__acoes { display: flex; gap: 8px; align-items: center; }
 main, .entrada { max-width: 880px; margin: 24px auto; padding: 0 16px; }
 .entrada { max-width: 420px; display: grid; gap: 12px; }
