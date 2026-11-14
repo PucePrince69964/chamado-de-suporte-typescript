@@ -1,71 +1,40 @@
+CREATE DATABASE IF NOT EXISTS chamados_suporte
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
--- =====================================
--- BANCO DE DADOS: CHAMADOS DE SUPORTE
--- =====================================
+USE chamados_suporte;
 
--- Criar tabela
-CREATE TABLE chamados (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    nome TEXT NOT NULL,
-    nivel TEXT NOT NULL,
-    urgencia TEXT NOT NULL,
-    prioridade TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  senha_hash VARCHAR(255) NOT NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- =====================================
--- INSERIR CHAMADOS
--- =====================================
+CREATE TABLE IF NOT EXISTS chamados (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(200) NOT NULL,
+  descricao TEXT NULL,
+  prioridade ENUM('baixa', 'media', 'alta') NOT NULL DEFAULT 'media',
+  status ENUM('aberto', 'em_andamento', 'resolvido') NOT NULL DEFAULT 'aberto',
+  urgencia VARCHAR(20) NOT NULL DEFAULT 'Nivel 2',
+  usuario_id INT NOT NULL,
+  criada_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_chamados_usuario
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+    ON DELETE CASCADE
+);
 
-INSERT INTO chamados (nome, nivel, urgencia, prioridade)
-VALUES
-('Computador não liga', 'Nivel 1', 'Nivel 1', 'alta'),
-('Problema na impressora', 'Nivel 2', 'Nivel 2', 'media'),
-('Erro no sistema', 'Nivel 3', 'Nivel 1', 'alta'),
-('Solicitação de acesso', 'Nivel 2', 'Nivel 3', 'baixa'),
-('Internet indisponível', 'Nivel 1', 'Nivel 1', 'alta'),
-('Problema com senha', 'Nivel 3', 'Nivel 2', 'media');
+-- Usuários de teste da Aula 5 (senha de todos: senha123)
+INSERT INTO usuarios (nome, email, senha_hash) VALUES
+  ('Marcelo Macrino', 'marcelo@email.com', '$2b$10$mDxl2ubcI70/KrG/h4H0n.Pok4jKJZfmh4R0QPSiWszf340mDT9e.'),
+  ('João Silva', 'joao@email.com', '$2b$10$mDxl2ubcI70/KrG/h4H0n.Pok4jKJZfmh4R0QPSiWszf340mDT9e.'),
+  ('Maria Souza', 'maria@email.com', '$2b$10$mDxl2ubcI70/KrG/h4H0n.Pok4jKJZfmh4R0QPSiWszf340mDT9e.');
 
--- =====================================
--- CONSULTAR TODOS OS CHAMADOS
--- =====================================
-
-SELECT * FROM chamados;
-
--- =====================================
--- CONTAR TOTAL DE CHAMADOS
--- =====================================
-
-SELECT COUNT(*) AS total
-FROM chamados;
-
--- =====================================
--- CONTAR CHAMADOS DE NIVEL 1
--- =====================================
-
-SELECT COUNT(*) AS mais_importantes
-FROM chamados
-WHERE urgencia = 'Nivel 1';
-
--- =====================================
--- CONTAR CHAMADOS POR PRIORIDADE
--- =====================================
-
-SELECT prioridade, COUNT(*) AS quantidade
-FROM chamados
-GROUP BY prioridade;
-
--- =====================================
--- CONTAR CHAMADOS POR NIVEL
--- =====================================
-
-SELECT nivel, COUNT(*) AS quantidade
-FROM chamados
-GROUP BY nivel;
-
--- =====================================
--- ORDENAR POR URGENCIA E PRIORIDADE
--- =====================================
-
-SELECT *
-FROM chamados
-ORDER BY urgencia ASC, prioridade ASC;
+-- Chamados iniciais separados por usuário
+INSERT INTO chamados (titulo, prioridade, status, urgencia, usuario_id) VALUES
+  ('Servidor de arquivos sem acesso na rede', 'alta', 'aberto', 'Nivel 1', 1),
+  ('Atualizar certificado SSL do portal', 'media', 'em_andamento', 'Nivel 2', 1),
+  ('Trocar teclado com defeito no RH', 'baixa', 'aberto', 'Nivel 3', 2),
+  ('Erro 500 ao emitir nota fiscal', 'alta', 'aberto', 'Nivel 1', 3);
