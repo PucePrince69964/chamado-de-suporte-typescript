@@ -11,13 +11,25 @@ const lista: Tarefa[] = [...tarefas];
 function criarItem(tarefa: Tarefa): HTMLLIElement {
     const item = document.createElement("li");
     item.className = `tarefa tarefa--${tarefa.prioridade}`;
+
     const titulo = document.createElement("h3");
     titulo.className = "tarefa__titulo";
     titulo.textContent = `#${tarefa.id} ${tarefa.titulo}`;
+
+    const urgencia = document.createElement("span");
+    urgencia.className = "etiqueta etiqueta--status";
+    urgencia.textContent = tarefa.urgencia.replace("Nivel", "Nível ");
+
     const etiqueta = document.createElement("span");
     etiqueta.className = `etiqueta etiqueta--${tarefa.prioridade}`;
     etiqueta.textContent = tarefa.prioridade;
-    item.append(titulo, etiqueta);
+    
+    const meta = document.createElement("div");
+    meta.className = "tarefa__meta";
+    meta.append(urgencia, etiqueta);
+
+    item.append(titulo, meta);
+
     return item;
 }
 
@@ -30,11 +42,12 @@ function desenhar(): void {
         if (tarefa.status === "aberto") {
             pendentes++;
         }
-
+        console.log(tarefa.urgencia)
         if (tarefa.urgencia === "Nivel 1") {
-            contador++;
-        }      
+            contador++ 
+        }
     }
+
 elemento("total").textContent = String(lista.length);
 elemento("pendentes").textContent = String(pendentes);
 elemento("mais-importantes").textContent = String(contador);
